@@ -7,6 +7,9 @@ header, main, nav, footer {
     text-align: center;
 }
 
+hr {
+    width: 50%;
+}
 h1 {
     font-family: 'M PLUS 1p', sans-serif;
     font-size: 4em;
