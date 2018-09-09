@@ -1,10 +1,17 @@
 body {
-    background-color:black;
+    background-color: #ffddcc;
     color:gray;
 }
 
 header, main, nav, footer {
     text-align: center;
+}
+
+h1 {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-size: 4em;
+    margin-bottom: 0px;
+    color:white;
 }
 
 nav a {    /*links within "nav" container*/
@@ -16,21 +23,59 @@ nav a {    /*links within "nav" container*/
 }
 
 nav a:hover { /*pseudo class*/
-    border-bottom:2px orange solid;
+    border-bottom:2px #ccccff solid;
     font-size: 2em;
     transition: .9s; /*transition effect */
 }
 
+#content {
+    margin: auto;
+    //width: 75%;
+}
+
 #me, #welcomeText {
     float:left;
+    background-color: #fff2e6;
+    
 }
 
 #welcomeText {
     text-align: left;
+    
 }
 
 footer {
     clear: left;
     font-size: smaller;
     color: white;
+}
+
+table { margin: 0px auto;
+
+}
+
+td {
+    padding-right: 10px;
+    font-size: 1.3em;
+}
+
+td strong {
+    color: orange;
+}
+
+#table-header {
+    background-color: #351a00;
+}
+
+.table-row {
+    background-color: #753900;
+}
+
+ul {
+    text-align: left;
+    padding-left: 200px;
+}
+
+.hobby {
+    color: yellow;
 }
