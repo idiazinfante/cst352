@@ -29,8 +29,8 @@ nav a:hover { /*pseudo class*/
 }
 
 #content {
-    margin: auto;
-    //width: 75%;
+    margin: 0px auto;
+    width: 75%;
 }
 
 #me, #welcomeText {
