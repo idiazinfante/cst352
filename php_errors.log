@@ -83,3 +83,5 @@
 [13-Sep-2018 18:26:13 UTC] PHP Stack trace:
 [13-Sep-2018 18:26:13 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/practice/rps.php:0
 [13-Sep-2018 18:26:13 UTC] PHP   2. hand2() /home/ubuntu/workspace/cst352/practice/rps.php:68
+[18-Sep-2018 17:32:14 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ubuntu/workspace/cst352/practice/arrays.php on line 30
+[18-Sep-2018 18:06:35 UTC] PHP Parse error:  syntax error, unexpected '(', expecting ']' in /home/ubuntu/workspace/cst352/practice/arrays.php on line 53

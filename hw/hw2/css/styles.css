@@ -1,0 +1,29 @@
+    body{
+        margin: 0 auto;
+        background-color: #FCEAD1;
+        background-image:url("../img/bg.jpg");
+        height: 100%; 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: 'Press Start 2P', cursive;
+    }
+    
+    
+
+    
+    h1 {
+        text-align: center;
+    }
+    
+    
+    #zoo {
+        padding: 50px;
+        margin-top: 100px;
+        margin: 0px auto;
+        width:  50%;
+        border: 10px dashed brown;
+        background-color: #B2E0B9;
+    }
+    
+ 
