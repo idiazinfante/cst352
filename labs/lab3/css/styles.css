@@ -1,0 +1,14 @@
+  
+
+            .hand {
+                margin: 0px auto;
+                padding:10px;
+                padding-top:20px;
+                padding-bottom: 20px;
+                border: solid white;
+                border-radius: 8px;
+                width:  75%;
+                font-size: 2em;
+                background-color: rgba(225,225,225, .5);
+            }
+            
