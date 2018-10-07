@@ -71,7 +71,9 @@ $randomBackground = "img/sea.jpg";
             }
             
             input {
-                border-radius: 20px;
+                border-radius: 30px;
+                font-size: 1.5em;
+                
             }
             
             #select {
