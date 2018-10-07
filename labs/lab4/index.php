@@ -62,6 +62,7 @@ $randomBackground = "img/sea.jpg";
             
                #hvlayout {
                 background-color: white;
+                color: black;
                 padding: 10px;
                 text-align: left;
                 border-radius: 10px;
