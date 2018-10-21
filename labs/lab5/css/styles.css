@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    background-color: #FFEFD5;
+    color: #3C4E66;
+}
+
+a {
+    color: #92ACCF;
+}
+
+a:hover {
+    color: grey;
+}
+
+#author {
+    font-family: 'Merriweather', serif;
+    background-color:#8AB6B2;
+    border: white solid;
+    border-radius: 5px;
+    padding: 5px;
+}
