@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <h1>Holiday Shopping</h1>
+        <h2> Cart</h2>
+        
+    </head>
+    
+    <script>
+       var tb= document.getElementById('total');
+       dtotal = document.getElementById('displaytotal');
+       tbody, total = 0;
+       var quantity = document.forms["shopping"]["quantity"].value;
+       var price = document.forms["shopping"]["price"].value;
+       
+       quantity = parseInt(quantity);
+       price= parseInt(price);
+       function getTotal() {
+           var total= quantity*price;
+           //return total;
+           //document.write(total);
+          document.getElementById("total").value= total;
+       }
+     
+        
+        
+        
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style >
+       html{
+           text-align: center;
+       }
+   table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+    </style>
+    
+    <body>
+        <form name="shopping">
+        <table style="width:100%" >
+  <tr>
+    <th>Product</th>
+    <th>Unit Prices</th> 
+    <th>Quantity</th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    <td>Fruit Cake</td>
+    <td id="price">$30</td>
+    <td> <input type="text" id="quantity"></td>
+    <td> getTotal()</td>
+  </tr>
+  <tr>
+    <td>Plata</td>
+    <td nid="price">$20</td>
+    <td> <input type="text" id="quantity"></td>
+    <td id="total">  </td>
+  </tr>
+  <tr>
+    <td>Shipping</td>
+   <td>  </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td>Subtotal</td>
+    <td>  </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td>Tax(10%)</td>
+    <td>  </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td>  </td>
+    <td>  </td>
+  </tr>
+</table>
+</form>
+ <h2> Shipping and Handling</h2>
+ <form action="/action_page.php" method="get">
+  <input type="checkbox" name="vehicle" value="nextday"> Next day delivery $15.00<br>
+  <input type="checkbox" name="vehicle" value="threeday" > Three day delivery $10.00<br>
+    <input type="checkbox" name="vehicle" value="regular" > Regular Shipping $5.00<br>
+    <br>
+    
+  <input type="button" value="Recalculate Total" onclick="getTotal()"/>
+</form>
+    </body>
+</html>
