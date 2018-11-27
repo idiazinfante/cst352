@@ -4,10 +4,11 @@ body{
 }
 
 #gameWindow{
+	margin: 0px auto;
 	position: relative;
 	width: 600px;
 	height: 400px;
-	background-color: #FFFFFF;
+	background-color: grey;
 	overflow: hidden;
 }
 
@@ -48,7 +49,7 @@ body{
 
 .wall {
 	position: absolute;
-	background-color: #666666;
+	background-color: blue;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
