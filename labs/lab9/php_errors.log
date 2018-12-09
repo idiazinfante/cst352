@@ -1,0 +1,18 @@
+[04-Dec-2018 18:59:49 UTC] PHP Warning:  include(../../sqlConnection.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 2
+[04-Dec-2018 18:59:49 UTC] PHP Stack trace:
+[04-Dec-2018 18:59:49 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0
+[04-Dec-2018 18:59:49 UTC] PHP Warning:  include(): Failed opening '../../sqlConnection.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 2
+[04-Dec-2018 18:59:49 UTC] PHP Stack trace:
+[04-Dec-2018 18:59:49 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0
+[04-Dec-2018 18:59:49 UTC] PHP Fatal error:  Call to undefined function getConnection() in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 3
+[04-Dec-2018 18:59:49 UTC] PHP Stack trace:
+[04-Dec-2018 18:59:49 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0
+[04-Dec-2018 19:00:03 UTC] PHP Warning:  include(../../../../sqlConnection.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 2
+[04-Dec-2018 19:00:03 UTC] PHP Stack trace:
+[04-Dec-2018 19:00:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0
+[04-Dec-2018 19:00:03 UTC] PHP Warning:  include(): Failed opening '../../../../sqlConnection.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 2
+[04-Dec-2018 19:00:03 UTC] PHP Stack trace:
+[04-Dec-2018 19:00:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0
+[04-Dec-2018 19:00:03 UTC] PHP Fatal error:  Call to undefined function getConnection() in /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php on line 3
+[04-Dec-2018 19:00:03 UTC] PHP Stack trace:
+[04-Dec-2018 19:00:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/cst352/labs/lab9/pets/adoptions.php:0

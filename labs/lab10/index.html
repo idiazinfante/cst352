@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+               $("#btnSubmit").click(function(){
+                  /*alert("Button has been clicked!"); */
+                  var answer1 =  $('#q1').val();
+                  
+                  if(answer1 == 4) {
+                      //alert("Correct");
+                      $('#feedback1').html("Correct");
+                  }
+                  else {
+                      //alert("Wrong")
+                      $('#feedback1').html("Wrong");
+                  }
+               }); 
+            });
+        </script>
+        <title>quiz</title>
+    </head>
+    <body>
+        
+
+    <h3>Enter your email
+    <input type="text" name=""/></br></h3>
+    What is 2+2? 
+    <select id="q1"> 
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select><br />
+    
+    <span id="feedback1"></span> </br>
+    
+    What is the capital of California?
+     <input type="text" name=""/> <br>
+     <button id="btnSubmit">Submit</button>
+    
+
+    </body>
+</html>
