@@ -32,7 +32,7 @@ $dbConn = getConnection("books");
      
  } else {
      
-
+    $_SESSION['adminName'] = $record['username'];
      
      header("location: adminOptions.php"); //redirects to another program.
      
