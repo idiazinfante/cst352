@@ -84,7 +84,7 @@ if (isset($_GET['addBookForm'])) {  //checks whether the form has been submitted
     <body>
         
         <?php
-    include "header.php";
+    include "adminHeader.php";
     ?>
         
         <h1> Add New Book!</h1><br>

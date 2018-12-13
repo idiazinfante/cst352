@@ -42,12 +42,12 @@ if (!isset($_SESSION['adminName'])) {
 }
 
 include '../sqlConnection.php';
-$dbConn = getConnection("quotes");
+$dbConn = getConnection("books");
 
 function getBookInfo() {
     global $dbConn;
     
-    $sql = "SELECT * FROM `b_book` WHERE book = "  . $_GET['book'];
+    $sql = "SELECT * FROM `b_book` WHERE bookId = "  . $_GET['bookId'];
     $stmt = $dbConn->prepare($sql);
     $stmt->execute();
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -57,43 +57,44 @@ function getBookInfo() {
     
 }
 
-if (isset($_GET['updateAuthorForm'])) { // User submitted the form
+if (isset($_GET['updateBookForm'])) { // User submitted the form
     
-    $sql = "UPDATE `q_author` 
-            SET   firstName = :firstName,
-                  lastName  = :lastName,
-                  gender    = :gender,
-                  dob       = :dob,
-                  dod       = :dod,
-                  profession= :profession,
-                  country   = :country,
-                  picture   = :picture,
-                  bio       = :bio
-              WHERE authorId = " . $_GET['authorId'];
+    $sql = "UPDATE `b_book` 
+            SET   title = :title,
+                  author  = :author,
+                  year    = :year,
+                  genre       = :genre,
+                  picture       = :picture,
+                  synopsis = :synopsis,
+                  avrating   = :avrating,
+                  seriesNum   = :seriesNum,
+                  Language       = :Language,
+                  bio            = :bio
+              WHERE bookId = " . $_GET['bookId'];
     $np = array();
-    $np[":firstName"] = $_GET['firstName'];
-    $np[":lastName"]  = $_GET['lastName'];
-    $np[":dob"]       = $_GET['dob'];
-    $np[":dod"]       = $_GET['dod'];
-    $np[":profession"] = $_GET['profession'];
-    $np[":country"]    = $_GET['country'];
-    $np[":picture"]    = $_GET['imageUrl'];
-    $np[":bio"]        = $_GET['bio'];
-    $np[":gender"]     = $_GET['gender'];
+    $np[":title"] = $_GET['title'];
+    $np[":author"]  = $_GET['author'];
+    $np[":year"]       = $_GET['year'];
+    $np[":genre"]       = $_GET['genre'];
+    $np[":picture"] = $_GET['picture'];
+    $np[":synopsis"]    = $_GET['synopsis'];
+    $np[":avrating"]    = $_GET['avrating'];
+    $np[":seriesNum"]        = $_GET['seriesNum'];
+    $np[":Language"]        = $_GET['Language'];
+    $np[":bio"]     = $_GET['bio'];
     
     $stmt = $dbConn->prepare($sql);
     $stmt->execute($np);
     
-    echo "Author info was updated!";
+    echo "Book info was updated!";
     
 }
 
 
 
-if (isset($_GET['authorId'])) {
+if (isset($_GET['bookId'])) {
     
-    $authorInfo = getAuthorInfo();
-    //print_r($authorInfo);
+    $bookInfo = getBookInfo();
     
     
 }
@@ -109,44 +110,25 @@ if (isset($_GET['authorId'])) {
     <body>
         
           <form>
-            <input type="hidden" name="authorId" value="<?= $authorInfo['authorId'] ?>" />
-            First Name: <input type="text" name="firstName" value="<?= $authorInfo['firstName'] ?>" /> <br />
-            Last Name: <input type="text" name="lastName"   value="<?= $authorInfo['lastName'] ?>"/> <br />
-            Gender: 
-            <input type="radio" name="gender" value="M" id="genderMale"  
-            
-              <?php
-              
-                 if ($authorInfo['gender'] == "M") {
-                     
-                     echo " checked ";
-                     
-                 }
-              
-              ?>
-
-            />
-                <label for="genderMale">Male</label>
-            <input type="radio" name="gender" value="F" id="genderFemale"  <?= ($authorInfo['gender'] == "F")?"checked":"" ?> /> 
-                <label for="genderFemale">Female</label><br>
-            
-            Day of birth: <input type="text" name="dob"  value="<?= $authorInfo['dob'] ?>"/> <br />
-            Day of death: <input type="text" name="dod"  value="<?= $authorInfo['dod'] ?>"/> <br />
-            Country: <input type="text" name="country"   value="<?= $authorInfo['country'] ?>"/> <br>
-            Profession: <input type="text" name="profession" value="<?= $authorInfo['profession'] ?>"/> <br>
-            
-            Image URL: <input type="text" name="imageUrl" value="<?= $authorInfo['picture'] ?>" size="40"/><br>
-            Bio: 
-            <textarea name="bio" cols="50" rows="5"/> <?= $authorInfo['bio'] ?> </textarea>
-            
+            <input type="hidden" name="bookId" value="<?= $bookInfo['bookId'] ?>" />
+            Title: <input type="text" name="title" value="<?= $bookInfo['title'] ?>" /> <br />
+            Author: <input type="text" name="author"   value="<?= $bookInfo['author'] ?>"/> <br />
+            Year: <input type="text" name="year"  value="<?= $bookInfo['year'] ?>"/> <br />
+            Genre: <input type="text" name="genre"  value="<?= $bookInfo['genre'] ?>"/> <br />
+            Picture: <input type="text" name="picture"   value="<?= $bookInfo['picture'] ?>"/> <br>
+            Synopsis: <textarea name="synopsis" cols="50" rows="5"/> <?= $bookInfo['synopsis'] ?> </textarea> <br>
+            Average Rating: <input type="text" name="avrating" value="<?= $bookInfo['avrating'] ?>"/><br>
+            Series Number: <input type="text" name="seriesNum" value="<?= $bookInfo['seriesNum'] ?>"/> <br>
+            Language: <input type="text" name="Language" value="<?= $bookInfo['Language'] ?>"/> <br>
+            Bio: <textarea name="bio" cols="50" rows="5"/> <?= $bookInfo['bio'] ?> </textarea>
             <br>
 
-            <input type="submit" value="Update Author" name="updateAuthorForm" />
+            <input type="submit" value="Edit Book" name="updateBookForm" />
         </form>
         
 
     </body>
-</html><br><BR>
+</html><br><br>
   <form action="logout.php">
             <input type="submit" class='btn btn-outline-danger' name="logout" value="Logout"/>
         </form>

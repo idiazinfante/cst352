@@ -4,10 +4,12 @@ session_start();
 include '../sqlConnection.php';
 $dbConn = getConnection("books");
 
+
+
 function displayAllBooks(){
     global $dbConn;
     
-    $sql = "SELECT bookId, title, author, genre, synopsis 
+    $sql = "SELECT bookId, title, avrating, author, genre, synopsis, picture 
             FROM b_book 
             ORDER BY title";
     
@@ -17,13 +19,18 @@ function displayAllBooks(){
     
     foreach ($books as $book) {
 
-        //echo "  <input type='hidden' name='seriesNum' value='".$book['seriesNum']."' >";
-        echo "<a onclick='openModal()' target='bookModal'   href='bookInfo.php?bookId=".$book['bookId']."'> " . $book['title'] . "<br></a>  " . $book['author'] . "<br>  ";
-        echo $book['synopsis'] . "<br><br>";
-        echo "<button value =" . $book['bookId'] . ">Add to favorites </button><br><br>";
+        echo "<br>";
+        echo "  <input type='hidden' name='seriesNum' value='".$book['seriesNum']."' >";
+        echo "<img src=" . $book['picture']." width ='150px' height='200px'/><br>";
+        echo "<b>".$book['title'] . "</b> <br>";
+        echo "<i>".$book['genre'] . "</i> <br> By:";
+        echo "<a href='#' class='bookLink' id='". $book["bookId"]. "'> " . $book['author'] . "</a> <br> Average Rating: " . $book['avrating'] . "<br>  ";
+        echo $book['synopsis'] . "<br><br><br><hr>";
         
     }
 }
+
+
 
 
 ?>
@@ -53,8 +60,49 @@ function displayAllBooks(){
                 width: 400px;
                 margin: auto;
             }
-            
+            .center{
+                  margin: auto;
+                  width: 50%;
+                  padding: 10px;
+            }
     </style>
+    <script>
+    $(document).ready(function(){
+                $('.bookLink').click(function(){
+                    //alert( $(this).attr("id") );
+                        $('#bookModal').modal("show");
+          
+            $.ajax({
+            
+            type: "GET",
+            url: "bookInfo.php",
+            dataType: "json",
+            data: { "bookId":$(this).attr("id") },
+            success: function(data,status) {
+               //alert(data.description);
+               $("#bookTitle").html(data.title);
+               $("#year").html(data.year);
+               $("#synopsis").html(data.synopsis);
+               $("#bookImg").attr("src",data.picture);
+               $("#genre").html(data.genre);
+               $("#author").html(data.author);
+               $("#bio").html(data.bio);
+
+            },
+            complete: function(data,status) { //optional, used for debugging purposes
+               //alert(status);
+            }
+            
+                        });//ajax
+                    }); 
+                });
+                
+        function openModal() {
+                    
+                    $('#myModal').modal("show");
+                    
+                }
+    </script>
     <body>
         
         <?php
@@ -62,54 +110,52 @@ function displayAllBooks(){
     ?>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Book Info</h5>
+        <h5 class="modal-title" id="bookTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <iframe name="bookModal" width='450'height='200'></iframe>
+        <div id="bookInfo">
+     <!-- this is an html element -->
+     
+     <h2><span id="author"></span></h2> <br>
+     <span id="bio"></span> <br>
+     
+  </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
       </div>
     </div>
   </div>
 </div>
 
- <?=displayAllBooks()?>
- 
- <div id="faveLink" style="display:none">
-     <a href="fave.php"> Display fave</a>
- </div>
- 
- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-    $("button").click(function() {
-        //alert($(this).val());
-        $.ajax({
-        
-        type: "GET",
-        url: "addFavorite.php",
-        dataType: "json",
-        data: { "bookId":$(this).val() },
-        success: function(data,status) {
-        alert(data);
-        
-        },
-        complete: function(data,status) { //optional, used for debugging purposes
-        //alert(data);
-        }
-        
-        });//ajax
-    })
-</script>
+<hr>
+  <h3>Order from:<br></h3>
+  
+ <form action="orderAscBook.php" method="GET">
+     <input type="submit" class="btn btn-warning" value="Lowest rated to highest">
+</form>
+
+<br>
+     <form action="orderDescBook.php" method="GET">
+  <input type="submit" class="btn btn-warning" value="Highest rated to lowest">
+</form>
+
+<hr>
+
+<div class="center">
+  <?=displayAllBooks()?>  
+</div>
  
  
+
 <hr>
     </body>
     <?php

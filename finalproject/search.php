@@ -4,29 +4,31 @@ session_start();
 include '../sqlConnection.php';
 $dbConn = getConnection("books");
 
-
-
-function displayReview() {
-    global $dbConn;
+function searchBook() {
+      global $dbConn;
     
-    
-    $sql = "SELECT * FROM b_review 
-            NATURAL JOIN b_book ";
-    $statement = $dbConn->prepare($sql);
-    $statement->execute();
-    //$records = $statement->fetch(); //returns only ONE record
-    $records = $statement->fetchAll(PDO::FETCH_ASSOC); //returns multiple records
-    
-    //print_r($records);
-    
-    foreach ($records as $record) {
-        
-        
-        echo "<a href='#' class='bookLink' id='". $record["bookId"]. "'>" .$record["title"]. "</a>";
-        echo "<br>";
-        echo $record['review'] . "<br><br><hr>";
+    $sql = "SELECT bookId, title, avrating, author, genre, synopsis, picture 
+            FROM `b_book` 
+            WHERE title LIKE '%".$_GET['searchInput']."%'
+            OR author LIKE '%".$_GET['searchInput']."%'";
+    $stmt = $dbConn->prepare($sql);
+    $stmt->execute();
+    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($books)) {
+        echo "Empty Search Results";
     }
-    
+    foreach ($books as $book) {
+
+        echo "<br>";
+        echo "  <input type='hidden' name='seriesNum' value='".$book['seriesNum']."' >";
+        echo "<img src=" . $book['picture']." width ='150px' height='200px'/><br>";
+        echo "<b>".$book['title'] . "</b> <br>";
+        echo "<i>".$book['genre'] . "</i> <br> By:";
+        echo "<a href='#' class='bookLink' id='". $book["bookId"]. "'> " . $book['author'] . "</a> <br> Average Rating: " . $book['avrating'] . "<br>  ";
+        echo $book['synopsis'] . "<br><br><br><hr>";
+        
+    }
+
 }
 
 ?>
@@ -41,37 +43,6 @@ function displayReview() {
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>   
         
     </head>
-    <script>
-        $(document).ready(function(){
-                $('.bookLink').click(function(){
-                    //alert( $(this).attr("id") );
-                        $('#bookModal').modal("show");
-          
-            $.ajax({
-            
-            type: "GET",
-            url: "bookInfo.php",
-            dataType: "json",
-            data: { "bookId":$(this).attr("id") },
-            success: function(data,status) {
-               //alert(data.description);
-               $("#bookTitle").html(data.title);
-               $("#year").html(data.year);
-               $("#synopsis").html(data.synopsis);
-               $("#picture").attr("src", data.picture);
-               $("#genre").html(data.genre);
-               $("#author").html(data.author);
-               $("#bio").html(data.bio);
-
-            },
-            complete: function(data,status) { //optional, used for debugging purposes
-               //alert(status);
-            }
-            
-                        });//ajax
-                    }); 
-                });
-    </script>
     <style>
             body{
                 color: white;
@@ -91,26 +62,51 @@ function displayReview() {
                   width: 50%;
                   padding: 10px;
             }
-            
     </style>
+    <script>
+    $(document).ready(function(){
+                $('.bookLink').click(function(){
+                    //alert( $(this).attr("id") );
+                        $('#bookModal').modal("show");
+          
+            $.ajax({
+            
+            type: "GET",
+            url: "bookInfo.php",
+            dataType: "json",
+            data: { "bookId":$(this).attr("id") },
+            success: function(data,status) {
+               //alert(data.description);
+               $("#bookTitle").html(data.title);
+               $("#year").html(data.year);
+               $("#synopsis").html(data.synopsis);
+               $("#bookImg").attr("src",data.picture);
+               $("#genre").html(data.genre);
+               $("#author").html(data.author);
+               $("#bio").html(data.bio);
+
+            },
+            complete: function(data,status) { //optional, used for debugging purposes
+               //alert(status);
+            }
+            
+                        });//ajax
+                    }); 
+                });
+                
+        function openModal() {
+                    
+                    $('#myModal').modal("show");
+                    
+                }
+    </script>
     <body>
         
         <?php
     include "header.php";
     ?>
 
-    
-    <form action="books.php">
-        
-        <input type="submit" class="btn btn-primary btn-lg"value="Browse Books"/><br><br>
-        
-    </form>
-    <h2>Editor's Picks: </h2>
-    <div class="center">
-    <?=displayReview()?>  
-    </div>
-    
-    <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -123,10 +119,10 @@ function displayReview() {
       <div class="modal-body">
         <div id="bookInfo">
      <!-- this is an html element -->
-     <img id="picture" src="" width="150" height ="200"></img><br>
-     <h3><i><span id="genre"></span></i></h3> <br>
+     
      <h2><span id="author"></span></h2> <br>
-     <span id="synopsis"></span> <br>
+     <span id="bio"></span> <br>
+     
   </div>
       </div>
       <div class="modal-footer">
@@ -136,10 +132,18 @@ function displayReview() {
     </div>
   </div>
 </div>
-    
+
+<hr>
+
+<div class="center">
+  <?=searchBook()?>  
+</div>
+ 
+ 
+
 <hr>
     </body>
-     <?php
+    <?php
     include "footer.php";
     ?>
 </html>

@@ -15,18 +15,14 @@
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="books.php">All Books</a>
+        <a class="nav-link" href="books.php">Books</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login.php">Login</a>
       </li>
-      
-      <br> <li class="nav-item">
-        <form method="get" action="search.php">
-          <input type="text" placeholder="Search.." name="searchInput">
-        </form>
+      <li class="nav-item">
+        <a class="nav-link" href="adminOptions.php">Admin Options</a>
       </li>
-      
     </ul>
   </div>
 </nav>
