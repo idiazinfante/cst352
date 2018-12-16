@@ -29,7 +29,7 @@
                       $('#feedback2').html("Wrong");
                   }
                   //alert(score);
-                  $("#totalScore").html("The total Score is: "+score);
+                  $("#totalScore").html("The total score is: "+score);
                   
                    $.ajax({
             
@@ -40,8 +40,15 @@
                             "score": score},
                     success: function(data,status) {
                        //alert(data.score + " " + data.attempts);
-                       $("#prevScore").html("Your Previous Score was: " + data.score);
-                       $("#totalAttempts").html("total attempts: " + (parseInt(data.attempts) + 1));
+                       if(!data){
+                            $("#prevScore").html("No previous score found.");
+                            $("#totalAttempts").html("total attempts: 1");
+                       }
+                       else{
+                            $("#prevScore").html("Your Previous Score was: " + data.score);
+                            $("#totalAttempts").html("Total attempts: " + (parseInt(data.attempts) + 1));  
+                       }
+                       
                     
                     },
                     complete: function(data,status) { //optional, used for debugging purposes
@@ -54,10 +61,12 @@
             
            
         </script>
+        <link rel="stylesheet" href="css/styles.css" type="text/css" />
         <title>quiz</title>
     </head>
     <body>
-        
+
+<div id ="formdiv">
    <form>        
     <h3>Enter your email
     <input type="text" id="emailAddress" name="email"/></br></h3>
@@ -83,6 +92,7 @@
      <!--<button id="btnSubmit">Submit</button>-->
      <input type="button" id="btnSubmit" value="Submit"> 
     </form>
+    </div>
     
     </body>
 </html>
